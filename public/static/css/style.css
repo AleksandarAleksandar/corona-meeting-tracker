@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  transition: all 0.2 ease-in;
+  transition: all 0.2s;
 }
 
 html {
@@ -23,7 +23,25 @@ body {
 .form-field {
   display: flex;
   flex-direction: column;
-  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+}
+.form-row > div {
+  width: 48%;
+}
+.form-row > div:first-child {
+  margin-right: 4%;
+}
+
+.form-group {
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
 }
 
 input[type="text"] {
@@ -32,12 +50,22 @@ input[type="text"] {
   padding: 5px 10px;
   font-size: 16px;
   font-weight: 600;
+  width: unset;
+}
+input::placeholder {
+  color: rgba(192,192,192,1);
 }
 label {
   color: #f44336;
   padding-left: 4px;
   font-size: 14px;
   font-weight: 400;
+  width: unset;
+}
+
+.form-box h4 {
+  display: block;
+  margin: 0px;
 }
 
 .btn {
@@ -56,7 +84,6 @@ label {
   background-color: #f44336;
   color: white;
   cursor: pointer;
-  
 }
 
 .btn-inline {

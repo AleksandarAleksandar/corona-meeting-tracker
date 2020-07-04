@@ -1,39 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import Btn from './Btn';
+import MeetingForm from './MeetingForm'
 
 
 function App(props) {
   console.log(props)
+
+  let _click = () => {
+    // e.preventDefault();
+    console.log('click');
+    props.dispatch({ type: 'SOME_CLICK' })
+  }
   return (
     <div className="something">
 
-      <div className="form-box">
-        <form>
-          <div className="form-field">
-            <label>Label</label>
-            <input type="text" value="something..." />
-          </div>
-
-          <div className="form-field">
-            <label>Label</label>
-            <input type="text" value="something..." />
-          </div>
-
-          <div className="form-field">
-            <label>Label</label>
-            <input type="text" value="something..." />
-          </div>
-
-          <Btn />
-          <Btn title={'Submit'}/>
-          <Btn title={'Submit'} inline />
-          <Btn title={'Submit'} inline />
-          <Btn />
-          <Btn />
-
-        </form>
-      </div>
+      <MeetingForm />
+      <MeetingForm />
 
     </div>
   );

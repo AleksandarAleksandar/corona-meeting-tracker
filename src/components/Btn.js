@@ -6,7 +6,7 @@ const Btn = (props) => {
     cl+= ' btn-inline'
   }
   return (
-    <div className={cl}>{props.title}</div>
+    <div className={cl} onClick={props.handleClick}>{props.title}</div>
   )
 }
 
