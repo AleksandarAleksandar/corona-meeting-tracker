@@ -90,7 +90,10 @@ h1 {
   padding-right: 30px;
   padding-top: 8px;
   padding-bottom: 8px;
+    box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
   background-color: gray;
+  background-color: #64A46C;
   color: white;
   font-weight: 600;
   opacity: 1;
@@ -109,6 +112,79 @@ h1 {
     opacity: 0;
   }
 }
+
+/* MODAL */
+
+.modals-container {
+  z-index: 99;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 0px;
+  width: 0px;
+  overflow: visible;
+}
+
+.modals-container .close {
+  z-index: 9999;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 16px;
+  width: 16px;
+  background-color: #f44336;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  line-height: 16px;
+}
+.modals-container .close:hover {
+  cursor: pointer;
+}
+
+.modals-container .modal-bg {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.modals-container .modal {
+  min-width: 240px;
+  min-height: 120px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  opacity: 1;
+  animation-name: bump-animation;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in;
+}
+
+.modal .modal-content {
+  max-width: 320px;
+}
+
+@keyframes bump-animation {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 
 /* FORMS */
 .form-box {

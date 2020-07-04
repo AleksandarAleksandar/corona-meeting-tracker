@@ -5,6 +5,7 @@ import MeetingForm from './MeetingForm'
 import SearchForm from './SearchForm'
 import Results from './Results'
 import Toasts from './Toasts'
+import Modals from './Modals'
 import storageUtils from '../utils/storage-utils'
 import actionTypes from '../actions/action-types';
 
@@ -33,6 +34,7 @@ function App(props) {
   return (
     <div className="app">
       <Toasts />
+      
       <div className="header"><h1>Corona Tracker App</h1></div>
       <div className="main">
         <div className="wrapper">

@@ -1,7 +1,7 @@
 import actionTypes from '../actions/action-types'
 
 const initialState = {
-  route: 'RESULTS',
+  route: 'HOME',
   searchQuerry: '',
   meetings: [],
   meetingsFetching: false,

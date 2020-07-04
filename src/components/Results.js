@@ -47,8 +47,8 @@ class Results extends React.Component {
       <div className="section-results">
         <h2>{jsxTitle}</h2>
         <div className="filter"></div>
+        {jsxSpinner}
         <div className="items">
-          {jsxSpinner}
           {jsx}
         </div>
       </div>

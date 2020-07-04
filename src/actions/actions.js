@@ -30,7 +30,7 @@ let actionSubmitSearch = (q) => {
     // STEP 2
     dispatch({
       type: actionTypes.ROUTE,
-      payload: 'RESULTS'
+      payload: 'HOME'
     })
   }
 }

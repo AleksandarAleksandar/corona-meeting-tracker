@@ -8,7 +8,7 @@ ajaxSimulator.getMeetings = async () => {
   // data su verovatno samo meetings
   return new Promise(resolve => setTimeout(() => {
     resolve(meetings)
-  }, 2000));
+  }, 1000));
 };
 
 ajaxSimulator.postMeeting = async (meeting) => {
@@ -28,7 +28,7 @@ ajaxSimulator.postMeeting = async (meeting) => {
   };
   return new Promise(resolve => setTimeout(() => {
     resolve(success_ajax_res)
-  }, 2000));
+  }, 1000));
 };
 
 export default ajaxSimulator;

@@ -2,9 +2,11 @@ import React from 'react';
 import Btn from './Btn';
 import { connect } from 'react-redux';
 import geoUtils from '../utils/geo-utils';
-import actionTypes from '../actions/action-types'; // ?
 import { actionMeetingAdd } from '../actions/actions';
 import Spinner from './Spinner';
+import Modals from './Modals';
+import rootReducer from '../reducers';
+import actionTypes from '../actions/action-types';
 
 
 class MeetingForm extends React.Component {
@@ -20,7 +22,6 @@ class MeetingForm extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this._updatePosition = this._updatePosition.bind(this);
     this._submit = this._submit.bind(this);
-
   }
 
   handleInputChange(event) {
@@ -71,13 +72,45 @@ class MeetingForm extends React.Component {
 
   render() {
     let jsxSpinner = null;
-
     if (this.props.meetingAddFetching) {
       jsxSpinner = <Spinner />
     }
 
+    let _closeModal = () => {
+      this.setState({
+        modal: ''
+      })
+    }
+
+    let _openModal = () => {
+      this.setState({
+        modal: 'CURENT_LOCATION'
+      })
+    };
+
+    let _useMyCurrentLocation = () => {
+      geoUtils.getMyLocation(this._updatePosition);
+      _closeModal();
+    };
+
+    let jsxModalCurrentLocation = (
+      <div className="modal-content">
+        <p>We will get your current location from your browser if possiable. If browser asks "Know your location", please Allow</p>
+        <Btn inline title={'Cancel'} handleClick={_closeModal} />
+        <Btn inline title={'OK'} handleClick={_useMyCurrentLocation} />
+      </div>
+    )
+
+    let jsxModal = null;
+    if (this.state.modal === 'CURENT_LOCATION') {
+      jsxModal = jsxModalCurrentLocation;
+    }
+
     return (
       <div className="form-box">
+        <Modals cbClose={_closeModal}>
+          {jsxModal}
+        </Modals>
         <form>
           <h2>Add meeting</h2>
           <p>What person have you meet, where and when</p>
@@ -141,10 +174,15 @@ class MeetingForm extends React.Component {
               </div>
             </div>
 
-            <Btn title={'Use my current location'} inline handleClick={() => { geoUtils.getMyLocation(this._updatePosition) }} />
+            <Btn title={'Use my current location'} inline handleClick={_openModal} />
           </div>
 
-          <Btn title={'Cancel'} inline />
+          <Btn title={'Cancel'} inline handleClick={() => {
+            this.props.dispatch({
+              type: actionTypes.ROUTE,
+              payload: 'HOME'
+            })
+          }} />
           <Btn title={'Submit'} inline handleClick={this._submit} />
 
         </form>
