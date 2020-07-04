@@ -1,12 +1,14 @@
-import React from 'react'
-import Btn from './Btn'
-import { connect } from 'react-redux'
+import React from 'react';
+import Btn from './Btn';
+import { connect } from 'react-redux';
+import geoUtils from '../utils/geo-utils';
 
 class MeetingForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
     this.handleInputChange = this.handleInputChange.bind(this);
+    this._updatePosition = this._updatePosition.bind(this);
   }
 
   handleInputChange(event) {
@@ -17,6 +19,27 @@ class MeetingForm extends React.Component {
     this.setState({
       [name]: value
     });
+  }
+
+  _updatePosition(position) {
+    if (position === false) {
+      this.props.dispatch({
+        type: 'USER_LOCATION_DETECTION_NOT_POSSIBLE'
+      });
+    } else {
+      if (position.coords && typeof position.coords.latitude === 'number' && typeof position.coords.longitude === 'number') {
+        let lat = position.coords.latitude;
+        let long = position.coords.longitude;
+        this.setState({
+          lat,
+          long
+        })
+      }
+    }
+
+    if (position) {
+      this.setState({ pos: position })
+    }
   }
 
 
@@ -71,22 +94,26 @@ class MeetingForm extends React.Component {
 
               <div className="form-field">
 
-                <label>Lat.</label>
+                <label htmlFor="lat">Lat.</label>
                 <input
-                  type="text"
-                  placeholder="123"
+                  type="number"
+                  name="lat"
+                  value={this.state.lat}
+                  onChange={this.handleInputChange}
                 />
               </div>
               <div className="form-field">
-                <label>long.</label>
+                <label htmlFor="long">long.</label>
                 <input
-                  type="text"
-                  placeholder="123"
+                  type="number"
+                  name="long"
+                  value={this.state.long}
+                  onChange={this.handleInputChange}
                 />
               </div>
             </div>
 
-            <Btn title={'Use my current location'} inline handleClick={() => {}} />
+            <Btn title={'Use my current location'} inline handleClick={() => { geoUtils.getMyLocation(this._updatePosition) }} />
           </div>
 
           <Btn title={'Cancel'} inline />
