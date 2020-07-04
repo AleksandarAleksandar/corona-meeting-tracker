@@ -2,7 +2,9 @@ import React from 'react';
 import Btn from './Btn';
 import { connect } from 'react-redux';
 import geoUtils from '../utils/geo-utils';
-import actionTypes from '../actions/action-types'
+import actionTypes from '../actions/action-types';
+import { actionShowModel } from '../actions/actions';
+
 
 class MeetingForm extends React.Component {
   constructor(props) {
@@ -51,11 +53,30 @@ class MeetingForm extends React.Component {
     }
   }
 
+  _clearForm() {
+    this.setState({
+      firstname: '',
+      lastname: '',
+      date: '',
+      lat: '',
+      long: ''
+    });
+  }
+
   _submit() {
     this.props.dispatch({
       type: actionTypes.ADD_MEETING,
       payload: this.state
     })
+    this._clearForm();
+    //
+    /*
+    this.props.dispatch({
+      type: actionTypes.SHOW_TOAST,
+      payload: 'Success!'
+    })
+    */
+    this.props.dispatch(actionShowModel('Success!'));
   }
 
   render() {

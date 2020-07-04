@@ -11,7 +11,92 @@ html {
 }
 
 body {
+  padding: 0px;
+  margin: 0px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app .header {
   padding: 30px;
+}
+h1 {
+  margin: 0px;
+}
+
+.app .main {
+  flex: 1;
+  padding: 30px;
+}
+
+.app .footer {
+  padding: 30px;
+  text-align: center;
+  background-color: silver;
+  color: gray;
+}
+
+/* SPINNER*/
+
+@keyframes rotating-animation {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spinner {
+  border: 4px solid #f44336;
+  border-top: 4px solid transparent;
+  border-radius: 200px;
+  width: 16px;
+  height: 16px;
+  animation-name: rotating-animation;
+  animation-duration: 0.8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* TOAST */
+
+.toasts-container {
+  z-index: 99;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  height: 0px;
+  width: 0px;
+  overflow: visible;
+}
+.toasts-container .toast {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  border-radius: 200px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: gray;
+  color: white;
+  font-weight: 600;
+  opacity: 1;
+  animation-name: fading-animation;
+  animation-duration: 2s;
+}
+
+@keyframes fading-animation {
+  0% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* FORMS */

@@ -4,6 +4,7 @@ import Btn from './Btn';
 import MeetingForm from './MeetingForm'
 import SearchForm from './SearchForm'
 import Results from './Results'
+import Toasts from './Toasts'
 
 
 function App(props) {
@@ -15,14 +16,18 @@ function App(props) {
     props.dispatch({ type: 'SOME_CLICK' })
   }
   return (
-    <div className="something">
+    <div className="app">
+      <Toasts />
+      <div className="header"><h1>Corona Tracker App</h1></div>
+      <div className="main">
+        <SearchForm />
 
-      <SearchForm />
+        <Results />
 
-      <Results />
+        <MeetingForm />
 
-      <MeetingForm />
-
+      </div>
+      <div className="footer">Copyright</div>
     </div>
   );
 }

@@ -32,7 +32,7 @@ class SearchForm extends React.Component {
     }
   }
 
-  _submitSearch(q) {
+   _submitSearch(q) {
     this.props.dispatch({
       type: actionTypes.SUBMIT_SEARCH,
       payload: q
