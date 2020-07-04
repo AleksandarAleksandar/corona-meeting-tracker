@@ -5,27 +5,46 @@ import MeetingForm from './MeetingForm'
 import SearchForm from './SearchForm'
 import Results from './Results'
 import Toasts from './Toasts'
+import storageUtils from '../utils/storage-utils'
+import actionTypes from '../actions/action-types';
 
 
 function App(props) {
-  console.log(props)
 
-  let _click = () => {
-    // e.preventDefault();
-    console.log('click');
-    props.dispatch({ type: 'SOME_CLICK' })
+  let _devClearStorage = () => {
+    console.log('** clearing storage');
+    storageUtils.clear();
   }
+
+  let _routeAdd = () => {
+    props.dispatch({
+      type: actionTypes.ROUTE,
+      payload: 'ADD'
+    })
+  }
+
+  let jsxRoute = null;
+  if (props.route === 'ADD') {
+    jsxRoute = (<MeetingForm />)
+  } else {
+    jsxRoute = (<Results />)
+  }
+
   return (
     <div className="app">
       <Toasts />
       <div className="header"><h1>Corona Tracker App</h1></div>
       <div className="main">
-        <SearchForm />
+        <div className="wrapper">
+          <Btn title={'Track new person'} handleClick={_routeAdd} />
 
-        <Results />
+          <SearchForm />
 
-        <MeetingForm />
+          {jsxRoute}
 
+          <h2>Dev options</h2>
+          <Btn title={'Clear storage'} handleClick={_devClearStorage} />
+        </div>
       </div>
       <div className="footer">Copyright</div>
     </div>
@@ -34,6 +53,9 @@ function App(props) {
 
 // export default App;
 const mapStateToProps = (state) => {
-  return { appState: state };
+  return {
+    appState: state,
+    route: state.route
+  };
 };
 export default connect(mapStateToProps)(App);

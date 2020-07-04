@@ -5,7 +5,7 @@ const search = (meetings, q) => {
       // if empty return all results
       return true;
     }
-    if (item.firstname.toUpperCase().includes(q.toUpperCase())) {
+    if (item.firstname.toUpperCase().includes(q.toUpperCase()) || item.lastname.toUpperCase().includes(q.toUpperCase())) {
       return true;
     }
     return false;

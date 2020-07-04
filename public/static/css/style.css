@@ -15,6 +15,13 @@ body {
   margin: 0px;
 }
 
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  min-width: 320px;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -22,10 +29,14 @@ body {
 }
 
 .app .header {
-  padding: 30px;
+  padding: 10px 30px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
 }
 h1 {
   margin: 0px;
+  font-size: 24px;
 }
 
 .app .main {
@@ -161,7 +172,7 @@ label {
 .search-form-box {
   border: 2px solid #f44336;
   border-radius: 200px;
-  padding: 10px;
+  padding: 6px 10px;
 }
 .search-form-box input {
   border: 0px;

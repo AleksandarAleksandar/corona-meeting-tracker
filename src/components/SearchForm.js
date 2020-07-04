@@ -1,7 +1,6 @@
 import React from 'react';
-import Btn from './Btn';
 import { connect } from 'react-redux';
-import actionTypes from '../actions/action-types'
+import { actionSubmitSearch } from '../actions/actions'
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class SearchForm extends React.Component {
     const name = target.name;
 
     let old_value = this.state.search;
-    
+
     this.setState({
       [name]: value
     });
@@ -32,11 +31,8 @@ class SearchForm extends React.Component {
     }
   }
 
-   _submitSearch(q) {
-    this.props.dispatch({
-      type: actionTypes.SUBMIT_SEARCH,
-      payload: q
-    });
+  _submitSearch(q) {
+    this.props.dispatch(actionSubmitSearch(q));
   }
 
   render() {

@@ -1,16 +1,22 @@
 import actionTypes from '../actions/action-types'
-import idUtils from '../utils/id-utils'
-import { act } from 'react-dom/test-utils';
 
 const initialState = {
-  route: 'HOME',
+  route: 'RESULTS',
   searchQuerry: '',
   meetings: [],
+  meetingsFetching: false,
+  meetingAddFetching: false,
   toast: ''
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case actionTypes.ROUTE:
+      return {
+        ...state,
+        route: action.payload
+      }
 
     case actionTypes.SHOW_TOAST:
       return {
@@ -24,15 +30,29 @@ const rootReducer = (state = initialState, action) => {
         toast: ''
       }
 
-    case actionTypes.ADD_MEETING:
-      let new_meeting = {
-        ...action.payload,
-        id: idUtils.getNewId()
-      }
-      let meetings = [...state.meetings, new_meeting]
+    case actionTypes.MEETINGS_FETCHING:
       return {
         ...state,
-        meetings
+        meetingsFetching: true
+      }
+
+    case actionTypes.MEETINGS_FETCHED:
+      return {
+        ...state,
+        meetingsFetching: false,
+        meetings: action.payload
+      }
+
+    case actionTypes.MEETING_ADD_FETCHING:
+      return {
+        ...state,
+        meetingAddFetching: true
+      }
+
+    case actionTypes.MEETING_ADD_FETCHED:
+      return {
+        ...state,
+        meetingAddFetching: false
       }
 
     case actionTypes.SUBMIT_SEARCH:
