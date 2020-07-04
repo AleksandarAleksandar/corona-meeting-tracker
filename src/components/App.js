@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import Btn from './Btn';
 import MeetingForm from './MeetingForm'
+import SearchForm from './SearchForm'
+import Results from './Results'
 
 
 function App(props) {
@@ -15,7 +17,10 @@ function App(props) {
   return (
     <div className="something">
 
-      <MeetingForm />
+      <SearchForm />
+
+      <Results />
+
       <MeetingForm />
 
     </div>

@@ -58,7 +58,7 @@ input[type="number"] {
   padding-right: 1px;
 }
 input::placeholder {
-  color: rgba(192,192,192,1);
+  color: rgba(192, 192, 192, 1);
 }
 label {
   color: #f44336;
@@ -71,6 +71,20 @@ label {
 .form-box h4 {
   display: block;
   margin: 0px;
+}
+
+.search-form-box {
+  border: 2px solid #f44336;
+  border-radius: 200px;
+  padding: 10px;
+}
+.search-form-box input {
+  border: 0px;
+  outline: 1px dashed green;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .btn {
@@ -95,5 +109,3 @@ label {
   display: inline-block;
   margin-right: 10px;
 }
-
-
