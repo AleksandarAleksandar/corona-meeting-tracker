@@ -2,13 +2,22 @@ import React from 'react';
 import Btn from './Btn';
 import { connect } from 'react-redux';
 import geoUtils from '../utils/geo-utils';
+import actionTypes from '../actions/action-types'
 
 class MeetingForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      firstname: '',
+      lastname: '',
+      date: '',
+      lat: '',
+      long: ''
+    }
     this.handleInputChange = this.handleInputChange.bind(this);
     this._updatePosition = this._updatePosition.bind(this);
+    this._submit = this._submit.bind(this);
+
   }
 
   handleInputChange(event) {
@@ -42,13 +51,15 @@ class MeetingForm extends React.Component {
     }
   }
 
+  _submit() {
+    this.props.dispatch({
+      type: actionTypes.ADD_MEETING,
+      payload: this.state
+    })
+  }
 
   render() {
-    let _submit = () => {
-      // e.preventDefault();
-      console.log('click');
-      this.props.dispatch({ type: 'SOME_CLICK' })
-    }
+
     return (
       <div className="form-box">
         <form>
@@ -117,7 +128,7 @@ class MeetingForm extends React.Component {
           </div>
 
           <Btn title={'Cancel'} inline />
-          <Btn title={'Submit'} inline handleClick={_submit} />
+          <Btn title={'Submit'} inline handleClick={this._submit} />
 
         </form>
       </div>

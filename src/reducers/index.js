@@ -1,14 +1,23 @@
+import actionTypes from '../actions/action-types'
+import idUtils from '../utils/id-utils'
+
 const initialState = {
   route: 'HOME',
   searchQuerry: '',
-  people: []
+  meetings: []
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SOMETHING':
+    case actionTypes.ADD_MEETING:
+      let new_meeting = {
+        ...action.payload,
+        id: idUtils.getNewId()
+      }
+      let meetings = [...state.meetings, new_meeting]
       return {
-        ...state
+        ...state,
+        meetings
       }
 
     default:
