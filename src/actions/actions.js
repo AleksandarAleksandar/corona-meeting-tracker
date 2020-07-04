@@ -51,6 +51,7 @@ let actionMeetingsNeeded = () => {
           type: actionTypes.MEETINGS_FETCHED,
           payload: response
         });
+        console.log(response);
       })
 
   }

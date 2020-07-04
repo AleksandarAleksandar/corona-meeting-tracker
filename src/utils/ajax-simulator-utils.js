@@ -1,4 +1,3 @@
-import idUtils from './id-utils'
 import storageUtils from './storage-utils'
 
 const ajaxSimulator = {};
@@ -11,15 +10,11 @@ ajaxSimulator.getMeetings = async () => {
   }, 1000));
 };
 
-ajaxSimulator.postMeeting = async (meeting) => {
+ajaxSimulator.postMeeting = async (new_meeting) => {
   let meetings = storageUtils.get();
   if (!Array.isArray(meetings)) {
     meetings = []
   };
-  let new_meeting = {
-    ...meeting,
-    id: idUtils.getNewId()
-  }
   let new_meetings = [...meetings, new_meeting];
   storageUtils.set(new_meetings);
   // simulate return of succesful ajax request
