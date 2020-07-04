@@ -1,5 +1,6 @@
 import actionTypes from '../actions/action-types'
 import idUtils from '../utils/id-utils'
+import { act } from 'react-dom/test-utils';
 
 const initialState = {
   route: 'HOME',
@@ -9,6 +10,7 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+
     case actionTypes.ADD_MEETING:
       let new_meeting = {
         ...action.payload,
@@ -18,6 +20,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         meetings
+      }
+
+    case actionTypes.SUBMIT_SEARCH:
+      return {
+        ...state,
+        searchQuerry: action.payload
       }
 
     default:
