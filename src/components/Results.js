@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { search, makeGroups } from '../utils/search-utils'
+import { search, makeGroups, groupBy } from '../utils/search-utils'
 import Spinner from './Spinner'
 import { actionMeetingsNeeded } from '../actions/actions'
 
@@ -9,6 +9,7 @@ class Results extends React.Component {
   constructor(props) {
     super(props)
     this.state = ({
+      makeGroups: true,
       groupByPerson: true
     })
   }
@@ -27,25 +28,58 @@ class Results extends React.Component {
     }
     let meetingsFiltered = search(meetings, props.searchQuerry);
 
-    let jsx = meetingsFiltered.map((item, index) => {
+    // NEW GROUPS
+    console.log('BEFORE');
+    console.log(meetingsFiltered);
+    let meetingGroupsObj = groupBy(meetingsFiltered, this.state.groupByPerson);
+    console.log('AFTER GROUPING');
+    console.log(meetingGroupsObj);
+    //
+
+
+    // 3 nacina prikaza -------------------------
+    let Group = (props) => {
+      let jsx_arr = props.meetings.map(() => {
+        return (<div className="item">ITEM</div>);
+      });
       return (
-        <div key={index} className="item">{item.firstname} {item.lastname} {item.date} {item.lat} {item.long}</div>
+        <>
+          {jsx_arr}
+        </>
       );
-    })
+    };
+
+
+    let jsx = null;
+    if (this.state.makeGroups) {
+      // items rendered in groups
+      let groupKeysArr = Object.keys(meetingGroupsObj); // extracting keys from object
+      let jsxGroups = groupKeysArr.map((group_key) => {
+        let groupMeetings = meetingGroupsObj[group_key]; // extract meetings from one group
+        return (
+          <div key={group_key} className="items-group">
+            <Group meetings={groupMeetings} />
+          </div>
+        );
+      });
+      jsx = jsxGroups;
+
+    } else {
+      // normal items, without groups
+      jsx = meetingsFiltered.map((item, index) => {
+        return (
+          <div key={index} className="item">{item.firstname} {item.lastname} {item.date} {item.lat} {item.long}</div>
+        );
+      })
+
+    }
+
+
     if (meetingsFiltered.length === 0) {
       jsx = (
         <p>List is empty</p>
       )
     }
-
-    // NEW GROUPS
-    console.log('BEFORE');
-    console.log(meetingsFiltered);
-    let meetingGroups = makeGroups(meetingsFiltered, this.state.groupByPerson);
-    console.log('AFTER GROUPING');
-    console.log(meetingGroups);
-    //
-
 
     let jsxSpinner = null;
     if (props.meetingsFetching) {
@@ -58,33 +92,51 @@ class Results extends React.Component {
       jsxTitle = 'All meetings'
     }
 
+    let clNoGroup = 'active';
     let clGroupPerson = '';
-    let clGroupDate = 'active'
-    if (this.state.groupByPerson === true) {
-      clGroupPerson = 'active';
-      clGroupDate = ''
+    let clGroupDate = '';
+    if (this.state.makeGroups) {
+      clNoGroup = '';
+      clGroupPerson = '';
+      clGroupDate = 'active'
+      if (this.state.groupByPerson === true) {
+        clNoGroup = '';
+        clGroupPerson = 'active';
+        clGroupDate = ''
+      }
     }
 
     return (
       <div className="section-results">
         <h2>{jsxTitle}</h2>
         <div className="filter">
+          <div className="title">Group by:</div>
+          <div
+            className={clNoGroup}
+            onClick={() => {
+              this.setState({
+                makeGroups: false
+              })
+            }}
+          >None</div>
           <div
             className={clGroupPerson}
             onClick={() => {
               this.setState({
-                groupByPerson: true
+                groupByPerson: true,
+                makeGroups: true
               })
             }}
-          >Group By Person</div>
+          >Person</div>
           <div
             className={clGroupDate}
             onClick={() => {
               this.setState({
-                groupByPerson: false
+                groupByPerson: false,
+                makeGroups: true
               })
             }}
-          >Group By Date</div>
+          >Date</div>
         </div>
         {jsxSpinner}
         <div className="items">

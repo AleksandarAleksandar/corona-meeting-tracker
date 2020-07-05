@@ -284,7 +284,8 @@ label {
 
 /* FILTER */
 .filter {
-  padding: 10px;
+  padding-top: 0px;
+  padding-bottom: 20px;
 }
 .filter > div {
   display: inline;
@@ -297,7 +298,22 @@ label {
   color: #f44336;
   font-weight: 700;
 }
+.filter > .title {
+  color: black;
+  font-weight: 600;
+  cursor: default;
+}
 
 
 
+/* ITEMS */
+
+.item {
+  border-bottom: 1px solid red;
+  margin: 10px;
+}
+.items-group {
+  padding-top: 20px;
+  border-bottom: 1px solid green;
+}
 

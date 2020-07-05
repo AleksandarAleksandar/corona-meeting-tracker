@@ -19,81 +19,26 @@ const cloneArrayPure = (arr) => {
 };
 
 
-const makeGroups = (meetings, groupByPerson) => {
-  let target_index;
-
-  // NEW
-  let person_id;
-  let date_id;
-  let meetingsGroups = [];
-
-  if (meetings.length > 0) {
-    // creating first group and inserting first item
-    let new_group;
+const groupBy = (meetings, groupByPerson) => {
+  // this function make object where each property conatin array of meetings
+  let groups_obj = {};
+  let group_key;
+  meetings.forEach((item) => {
     if (groupByPerson) {
-      person_id = meetings[0].firstname + meetings[0].lastname;
-      new_group = {
-        group_id: person_id,
-        meetings: [meetings[0]]
-      };
-      meetingsGroups.push(new_group); // INSERT
+      group_key = item.firstname + ' ' + item.lastname;
     } else {
-      date_id = meetings[0].date;
-      new_group = {
-        group_id: date_id,
-        meetings: [meetings[0]]
-      };
-      meetingsGroups.push(new_group); // INSERT
+      group_key = item.date;
     }
 
-  }
-
-
-
-
-  // group all other itmes
-
-  meetings.forEach((item) => {
-    //
-    person_id = item.firstname + item.lastname;
-    date_id = item.date;
-    //
-    meetingsGroups.forEach((group, index) => {
-      console.log(groupByPerson, person_id, group.group_id, !groupByPerson, date_id, group.group_id);
-      if ((groupByPerson && (person_id === group.group_id)) || (!groupByPerson && (date_id === group.group_id))) {
-        console.log(true);
-        // doing UPDATE
-        target_index = index;
-        let target_group = meetingsGroups[target_index];
-        let old_meetings = cloneArrayPure(target_group.meetings);  // pure clone of array
-        meetingsGroups[target_index] = {
-          ...target_group,
-          meetings: [...old_meetings, item]
-        }; // UPDATE
-      } else {
-        console.log(false)
-        // that kind of group not exist. doing INSERT
-        let new_group;
-        if (groupByPerson) {
-          new_group = {
-            group_id: person_id,
-            meetings: [item]
-          };
-        } else {
-          new_group = {
-            group_id: date_id,
-            meetings: [item]
-          };
-        }
-        meetingsGroups.push(new_group); // INSERT
-      }
-    }); // end of foreach
-
+    if (groups_obj[group_key]) {
+      groups_obj[group_key].push(item); // push into existing array
+    } else {
+      groups_obj[group_key] = [item]; // make new array
+    }
   });
 
+  return groups_obj;
+};
 
-  return meetingsGroups;
-}
 
-
-export { search, makeGroups };
+export { search, groupBy };
