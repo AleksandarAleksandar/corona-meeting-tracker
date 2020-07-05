@@ -240,7 +240,7 @@ h1 {
 
 input[type="text"],
 input[type="number"] {
-  border: 1px solid #f44336;
+  border: 1px solid #869dcc;
   border-radius: 4px;
   padding: 5px 10px;
   font-size: 16px;
@@ -255,7 +255,7 @@ input::placeholder {
   color: rgba(192, 192, 192, 1);
 }
 label {
-  color: #f44336;
+  color: #869dcc;
   padding-left: 4px;
   font-size: 14px;
   font-weight: 400;
@@ -280,7 +280,7 @@ label {
 }
 
 .search-form-box {
-  border: 2px solid #f44336;
+  border: 2px solid #869dcc;
   border-radius: 200px;
   padding: 6px 10px;
 }
@@ -294,7 +294,7 @@ label {
 }
 
 .btn {
-  border: 2px solid #f44336;
+  border: 2px solid #869dcc;
   border-radius: 4px;
   min-width: 120px;
   padding-left: 10px;
@@ -306,7 +306,7 @@ label {
   margin-bottom: 5px;
 }
 .btn:hover {
-  background-color: #f44336;
+  background-color: #869dcc;
   color: white;
   cursor: pointer;
 }
@@ -329,7 +329,7 @@ label {
   cursor: pointer;
 }
 .filter > .active {
-  color: #f44336;
+  color: #869dcc;
   font-weight: 700;
 }
 .filter > .title {
