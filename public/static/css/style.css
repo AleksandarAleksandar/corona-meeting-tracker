@@ -40,7 +40,7 @@ h2 {
 .wrapper {
   margin-left: auto;
   margin-right: auto;
-  /* width: 600px; */
+  width: 360px;
   min-width: 320px;
 }
 
@@ -48,7 +48,7 @@ h2 {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  min-width: 620px;
+  min-width: 360px;
 }
 
 .app .header {
@@ -374,4 +374,9 @@ label {
   text-overflow: ellipsis;
   margin-left: 20px;
   vertical-align: middle;
+}
+
+/* LAST FIXES */
+.rdrDefinedRangesWrapper {
+  display: none !important;
 }
