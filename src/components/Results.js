@@ -16,8 +16,9 @@ class Results extends React.Component {
     this.state = ({
       makeGroups: true,
       groupByPerson: false,
-      startDate: new Date(),
-      endDate: new Date()
+      startDate: null,
+      endDate: new Date(),
+      showDatePicker: false
     })
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -44,12 +45,17 @@ class Results extends React.Component {
       meetings = [];
     }
 
-  // filtering by search query
+    // filtering by search query
     let meetingsFilteredByString = search(meetings, props.searchQuerry);
     // filtering by date range
     let meetingsFilteredByDateRange = filterByDate(meetings, this.state.startDate, this.state.endDate);
+    // filtering finished
+    let meetingsFiltered = meetingsFilteredByDateRange;
+
     // grouping
-    let meetingGroupsObj = groupBy(meetingsFilteredByDateRange, this.state.groupByPerson);
+    let meetingGroupsObj = groupBy(meetingsFiltered, this.state.groupByPerson);
+
+
 
     // PRESENTATION
 
@@ -67,7 +73,7 @@ class Results extends React.Component {
 
     } else {
       // simple items rendering without groups
-      jsx = meetingsFilteredByString.map((item, index) => {
+      jsx = meetingsFiltered.map((item, index) => {
         return (
           <MeetingItem key={index} meeting={item} />
         );
@@ -76,7 +82,7 @@ class Results extends React.Component {
     }
 
 
-    if (meetingsFilteredByString.length === 0) {
+    if (meetingsFiltered.length === 0) {
       jsx = (
         <p>List is empty</p>
       )
@@ -115,13 +121,32 @@ class Results extends React.Component {
       dateDisplayFormat: 'yyyy-MM-dd'
     }
 
+    let clDateRange = 'collapsible';
+    if (this.state.showDatePicker) {
+      clDateRange += ' show';
+    }
+
     return (
       <div className="section-results">
         <h2>{jsxTitle}</h2>
-        <DateRangePicker
-          ranges={[selectionRange]}
-          onChange={this.handleSelect}
-        />
+        <div className="date-filter">
+          <h4
+            className="clickable"
+            onClick={() => {
+              if (this.state.showDatePicker) {
+                this.setState({ showDatePicker: false })
+              } else {
+                this.setState({ showDatePicker: true })
+              }
+            }}
+          >Choose date range</h4>
+          <div className={clDateRange}>
+            <DateRangePicker
+              ranges={[selectionRange]}
+              onChange={this.handleSelect}
+            />
+          </div>
+        </div>
         <div className="filter">
           <div className="title">Group by:</div>
           <div

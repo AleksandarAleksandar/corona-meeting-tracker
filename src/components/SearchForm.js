@@ -41,6 +41,7 @@ class SearchForm extends React.Component {
         <input
           type="text"
           name="search"
+          placeholder="Search first and last name"
           value={this.state.search}
           onChange={this._handleSearchChange}
         />

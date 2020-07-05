@@ -15,10 +15,23 @@ body {
   margin: 0px;
 }
 
+h2, h3, h4 {
+  margin: 0px;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  margin-top: 0.5em;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
 .wrapper {
   margin-left: auto;
   margin-right: auto;
-  width: 400px;
+  width: 600px;
   min-width: 320px;
 }
 
@@ -251,7 +264,6 @@ label {
 }
 .search-form-box input {
   border: 0px;
-  outline: 1px dashed green;
   width: 100%;
   text-align: center;
   font-size: 18px;
@@ -303,6 +315,20 @@ label {
   cursor: default;
 }
 
+.date-filter {
+  border: 2px solid gray;
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+.date-filter .collapsible {
+  display: none;
+}
+.date-filter .collapsible.show {
+  display: block;
+}
+
+
 /* ITEMS */
 
 .items-group {
@@ -310,7 +336,6 @@ label {
   padding-top: 5px;
     margin-bottom: 20px;
 }
-
 .item {
   margin-bottom: 10px;
 }
