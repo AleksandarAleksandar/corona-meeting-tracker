@@ -12,6 +12,7 @@ class SearchForm extends React.Component {
     this._submitSearch = this._submitSearch.bind(this);
 
   }
+  
 
   _handleSearchChange(event) {
     const target = event.target;

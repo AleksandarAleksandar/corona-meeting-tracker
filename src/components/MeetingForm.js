@@ -128,6 +128,7 @@ class MeetingForm extends React.Component {
       _closeModal();
     };
 
+    // content for modal
     let jsxModalCurrentLocation = (
       <div className="modal-content">
         <p>We will get your current location from your browser if possiable. If browser asks "Know your location", please Allow</p>

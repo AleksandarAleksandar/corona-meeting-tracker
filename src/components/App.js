@@ -53,7 +53,7 @@ function App(props) {
           <Btn inline title={'Clear storage'} handleClick={_devClearStorage} />
         </div>
       </div>
-      <div className="footer">Copyright</div>
+      <div className="footer">Copyright © Aleksandar Vasiljevic 2020</div>
     </div>
   );
 }
