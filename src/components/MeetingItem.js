@@ -16,5 +16,17 @@ export default function MeetingItem(props) {
 }
 
 MeetingItem.propTypes = {
-  meeting: PropTypes.object
+  meeting: PropTypes.shape({
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    date: PropTypes.string,
+    lat: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
+    long: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ])
+  }),
 };
