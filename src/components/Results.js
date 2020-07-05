@@ -1,10 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { search, groupBy } from '../utils/filter-utils'
+import { search, filterByDate, groupBy } from '../utils/filter-utils'
 import Spinner from './Spinner'
 import { actionMeetingsNeeded } from '../actions/actions'
 import MeetingsGroup from './MeetingsGroup'
 import MeetingItem from './MeetingItem'
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRangePicker } from 'react-date-range';
 
 
 class Results extends React.Component {
@@ -12,8 +15,19 @@ class Results extends React.Component {
     super(props)
     this.state = ({
       makeGroups: true,
-      groupByPerson: false
+      groupByPerson: false,
+      startDate: new Date(),
+      endDate: new Date()
     })
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  handleSelect(range) {
+    console.log(range); // native Date object
+    this.setState({
+      startDate: range.selection.startDate,
+      endDate: range.selection.endDate
+    });
   }
 
   componentDidMount() {
@@ -29,9 +43,13 @@ class Results extends React.Component {
     if (!Array.isArray(meetings)) {
       meetings = [];
     }
-    let meetingsFiltered = search(meetings, props.searchQuerry);
 
-    let meetingGroupsObj = groupBy(meetingsFiltered, this.state.groupByPerson);
+  // filtering by search query
+    let meetingsFilteredByString = search(meetings, props.searchQuerry);
+    // filtering by date range
+    let meetingsFilteredByDateRange = filterByDate(meetings, this.state.startDate, this.state.endDate);
+    // grouping
+    let meetingGroupsObj = groupBy(meetingsFilteredByDateRange, this.state.groupByPerson);
 
     // PRESENTATION
 
@@ -49,7 +67,7 @@ class Results extends React.Component {
 
     } else {
       // simple items rendering without groups
-      jsx = meetingsFiltered.map((item, index) => {
+      jsx = meetingsFilteredByString.map((item, index) => {
         return (
           <MeetingItem key={index} meeting={item} />
         );
@@ -58,7 +76,7 @@ class Results extends React.Component {
     }
 
 
-    if (meetingsFiltered.length === 0) {
+    if (meetingsFilteredByString.length === 0) {
       jsx = (
         <p>List is empty</p>
       )
@@ -89,9 +107,21 @@ class Results extends React.Component {
       }
     }
 
+    //
+    const selectionRange = {
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+      key: 'selection',
+      dateDisplayFormat: 'yyyy-MM-dd'
+    }
+
     return (
       <div className="section-results">
         <h2>{jsxTitle}</h2>
+        <DateRangePicker
+          ranges={[selectionRange]}
+          onChange={this.handleSelect}
+        />
         <div className="filter">
           <div className="title">Group by:</div>
           <div

@@ -25,27 +25,32 @@ function App(props) {
   }
 
   let jsxRoute = null;
+  let jsxBtn = null;
   if (props.route === 'ADD') {
     jsxRoute = (<MeetingForm />)
   } else {
-    jsxRoute = (<Results />)
+    jsxRoute = (<Results />);
+    jsxBtn = (
+      <p>
+        <Btn inline title={'Track new person'} handleClick={_routeAdd} />
+      </p>
+    );
   }
 
   return (
     <div className="app">
       <Toasts />
-      
       <div className="header"><h1>Corona Tracker App</h1></div>
       <div className="main">
         <div className="wrapper">
-          <Btn title={'Track new person'} handleClick={_routeAdd} />
 
-          <SearchForm dispatch={props.dispatch}/>
+          <SearchForm dispatch={props.dispatch} />
 
           {jsxRoute}
+          {jsxBtn}
 
           <h2>Dev options</h2>
-          <Btn title={'Clear storage'} handleClick={_devClearStorage} />
+          <Btn inline title={'Clear storage'} handleClick={_devClearStorage} />
         </div>
       </div>
       <div className="footer">Copyright</div>

@@ -1,3 +1,5 @@
+import { tr } from "date-fns/locale";
+
 const search = (meetings, q) => {
   let results = [];
   results = meetings.filter((item) => {
@@ -11,6 +13,31 @@ const search = (meetings, q) => {
     return false;
   })
   return results;
+};
+
+
+const filterByDate = (meetings, startDate, endDate) => {
+  let meetingsFiltered = meetings.filter(item => {
+    let inRange = false;
+    try {
+      console.log(item.date);
+      let d = new Date(item.date);
+      var d1 = new Date(startDate);
+      var d2 = new Date(endDate);
+      d2.setHours(d2.getHours() + 1); // fix
+      if (d >= d1 && d <= d2) {
+        inRange = true;
+      }
+    } catch (error) {
+      console.log('Error - at least one of the dates is not valid')
+      console.log(error)
+    }
+    if (inRange) {
+      return true;
+    }
+  });
+
+  return meetingsFiltered;
 };
 
 
@@ -36,4 +63,4 @@ const groupBy = (meetings, groupByPerson) => {
 };
 
 
-export { search, groupBy };
+export { search, filterByDate, groupBy };
