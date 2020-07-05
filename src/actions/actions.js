@@ -2,10 +2,8 @@ import actionTypes from '../actions/action-types';
 import ajaxSimulator from '../utils/ajax-simulator-utils'
 
 let actionShowModel = (title) => {
-  // console.log('t 1')
   // THUNK
   return (dispatch) => {
-    // console.log('t 2')
     dispatch({
       type: actionTypes.SHOW_TOAST,
       payload: title

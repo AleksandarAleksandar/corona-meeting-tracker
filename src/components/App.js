@@ -12,7 +12,6 @@ import actionTypes from '../actions/action-types';
 function App(props) {
 
   let _devClearStorage = () => {
-    console.log('** clearing storage');
     storageUtils.clear();
   }
 
