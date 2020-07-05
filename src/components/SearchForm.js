@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { actionSubmitSearch } from '../actions/actions';
 
 class SearchForm extends React.Component {
@@ -49,5 +49,9 @@ class SearchForm extends React.Component {
     )
   }
 }
+
+SearchForm.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
 
 export default SearchForm;

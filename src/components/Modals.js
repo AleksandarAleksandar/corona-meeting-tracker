@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Modals(props) {
   let _close = () => {
@@ -25,5 +26,9 @@ function Modals(props) {
     </div>
   )
 }
+
+Modals.propTypes = {
+  cbClose: PropTypes.func
+};
 
 export default Modals;

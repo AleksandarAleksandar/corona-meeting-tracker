@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { search, filterByDate, groupBy } from '../utils/filter-utils'
 import Spinner from './Spinner'
@@ -48,7 +49,7 @@ class Results extends React.Component {
     // filtering by search query
     let meetingsFilteredByString = search(meetings, props.searchQuerry);
     // filtering by date range
-    let meetingsFilteredByDateRange = filterByDate(meetings, this.state.startDate, this.state.endDate);
+    let meetingsFilteredByDateRange = filterByDate(meetingsFilteredByString, this.state.startDate, this.state.endDate);
     // filtering finished
     let meetingsFiltered = meetingsFilteredByDateRange;
 
@@ -184,6 +185,10 @@ class Results extends React.Component {
     )
   }
 
+};
+
+Results.propTypes = {
+  meetings: PropTypes.array
 };
 
 const mapStateToProps = (state) => {

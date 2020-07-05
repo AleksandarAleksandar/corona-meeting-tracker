@@ -1,5 +1,3 @@
-import { tr } from "date-fns/locale";
-
 const search = (meetings, q) => {
   let results = [];
   results = meetings.filter((item) => {
@@ -20,7 +18,7 @@ const filterByDate = (meetings, startDate, endDate) => {
   let meetingsFiltered = meetings.filter(item => {
     let inRange = false;
     try {
-      console.log(item.date);
+      // console.log(item.date);
       let d = new Date(item.date);
       var d1 = new Date(startDate);
       var d2 = new Date(endDate);
@@ -35,6 +33,7 @@ const filterByDate = (meetings, startDate, endDate) => {
     if (inRange) {
       return true;
     }
+    return false;
   });
 
   return meetingsFiltered;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MeetingItem from './MeetingItem'
 
 export default function MeetingsGroup(props) {
@@ -13,3 +14,7 @@ export default function MeetingsGroup(props) {
     </div>
   )
 }
+
+MeetingsGroup.propTypes = {
+  meetings: PropTypes.array
+};

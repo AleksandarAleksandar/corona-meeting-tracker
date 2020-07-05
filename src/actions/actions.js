@@ -10,7 +10,7 @@ let actionShowModel = (title) => {
       type: actionTypes.SHOW_TOAST,
       payload: title
     });
-    let t = setTimeout(() => {
+    setTimeout(() => {
       // remove toast after 2 seconds
       dispatch({ type: actionTypes.REMOVE_TOAST });
     }, 2000);

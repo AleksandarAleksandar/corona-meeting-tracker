@@ -2,12 +2,11 @@ import React from 'react';
 import Btn from './Btn';
 import { connect } from 'react-redux';
 import geoUtils from '../utils/geo-utils';
+import actionTypes from '../actions/action-types';
 import { actionMeetingAdd } from '../actions/actions';
 import Spinner from './Spinner';
 import Modals from './Modals';
-import rootReducer from '../reducers';
-import actionTypes from '../actions/action-types';
-
+import FormFieldErr from './FormFieldErr'
 
 class MeetingForm extends React.Component {
   constructor(props) {
@@ -80,10 +79,8 @@ class MeetingForm extends React.Component {
       valid = false;
       errors.lastname = 'Last name can not be empty';
     }
-    let date_invalid = false;
     let d = new Date(s.date);
     if (isNaN(d.getTime())) {
-      date_invalid = true
       valid = false;
       errors.date = 'Date invalid format. Please use the followring format YYYY-MM-DD (ECMAScript Date string)';
     }
@@ -144,20 +141,6 @@ class MeetingForm extends React.Component {
       jsxModal = jsxModalCurrentLocation;
     }
 
-    let Err = (props) => {
-      let jsxErr = null;
-      if (props.err) {
-        jsxErr = (
-          <div className="form-error"><span>*</span> {props.err}</div>
-        );
-      }
-      return (
-        <>
-          {jsxErr}
-        </>
-      )
-    }
-
     return (
       <div className="form-box">
         <Modals cbClose={_closeModal}>
@@ -175,7 +158,7 @@ class MeetingForm extends React.Component {
               value={this.state.firstname}
               onChange={this.handleInputChange}
             />
-            <Err err={this.state.errors.firstname} />
+            <FormFieldErr err={this.state.errors.firstname} />
           </div>
 
           <div className="form-field">
@@ -186,7 +169,7 @@ class MeetingForm extends React.Component {
               value={this.state.lastname}
               onChange={this.handleInputChange}
             />
-            <Err err={this.state.errors.lastname} />
+            <FormFieldErr err={this.state.errors.lastname} />
           </div>
 
           <div className="form-field">
@@ -199,7 +182,7 @@ class MeetingForm extends React.Component {
               value={this.state.date}
               onChange={this.handleInputChange}
             />
-            <Err err={this.state.errors.date} />
+            <FormFieldErr err={this.state.errors.date} />
           </div>
 
           <div className="form-group">

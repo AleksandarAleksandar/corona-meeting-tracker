@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 
 function Toasts(props) {
@@ -14,9 +15,14 @@ function Toasts(props) {
     </div>
   )
 }
+
+Toasts.propTypes = {
+  toast: PropTypes.string
+};
+
 const mapStateToProps = (state) => {
   return {
     toast: state.toast
   }
 }
-export default connect(mapStateToProps)(Toasts)
+export default connect(mapStateToProps)(Toasts);

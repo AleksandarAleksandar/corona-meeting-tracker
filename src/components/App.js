@@ -1,14 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import Btn from './Btn';
 import MeetingForm from './MeetingForm'
 import SearchForm from './SearchForm'
 import Results from './Results'
 import Toasts from './Toasts'
-import Modals from './Modals'
 import storageUtils from '../utils/storage-utils'
 import actionTypes from '../actions/action-types';
-
 
 function App(props) {
 
@@ -31,9 +30,10 @@ function App(props) {
   } else {
     jsxRoute = (<Results />);
     jsxBtn = (
-      <p>
+      <>
+        <br />
         <Btn inline title={'Track new person'} handleClick={_routeAdd} />
-      </p>
+      </>
     );
   }
 
@@ -58,10 +58,16 @@ function App(props) {
   );
 }
 
+App.propTypes = {
+  dispatch: PropTypes.func,
+  route: PropTypes.string
+};
+
 // export default App;
 const mapStateToProps = (state) => {
   return {
     route: state.route
   };
 };
+
 export default connect(mapStateToProps)(App);
