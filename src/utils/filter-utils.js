@@ -14,11 +14,6 @@ const search = (meetings, q) => {
 };
 
 
-const cloneArrayPure = (arr) => {
-  return [...arr];
-};
-
-
 const groupBy = (meetings, groupByPerson) => {
   // this function make object where each property conatin array of meetings
   let groups_obj = {};

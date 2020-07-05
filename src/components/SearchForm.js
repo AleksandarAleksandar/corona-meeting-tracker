@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { actionSubmitSearch } from '../actions/actions'
+import { actionSubmitSearch } from '../actions/actions';
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -48,7 +48,5 @@ class SearchForm extends React.Component {
     )
   }
 }
-const mapStateToProps = (state) => {
-  return { appState: state };
-};
-export default connect(mapStateToProps)(SearchForm);
+
+export default SearchForm;

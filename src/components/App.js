@@ -40,7 +40,7 @@ function App(props) {
         <div className="wrapper">
           <Btn title={'Track new person'} handleClick={_routeAdd} />
 
-          <SearchForm />
+          <SearchForm dispatch={props.dispatch}/>
 
           {jsxRoute}
 
@@ -56,7 +56,6 @@ function App(props) {
 // export default App;
 const mapStateToProps = (state) => {
   return {
-    appState: state,
     route: state.route
   };
 };

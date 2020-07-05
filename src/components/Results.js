@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { search, makeGroups, groupBy } from '../utils/search-utils'
+import { search, groupBy } from '../utils/filter-utils'
 import Spinner from './Spinner'
 import { actionMeetingsNeeded } from '../actions/actions'
+import MeetingsGroup from './MeetingsGroup'
+import MeetingItem from './MeetingItem'
 
 
 class Results extends React.Component {
@@ -10,7 +12,7 @@ class Results extends React.Component {
     super(props)
     this.state = ({
       makeGroups: true,
-      groupByPerson: true
+      groupByPerson: false
     })
   }
 
@@ -20,6 +22,7 @@ class Results extends React.Component {
   }
 
   render() {
+    // DATA
     let props = this.props;
 
     let meetings = props.meetings;
@@ -28,47 +31,27 @@ class Results extends React.Component {
     }
     let meetingsFiltered = search(meetings, props.searchQuerry);
 
-    // NEW GROUPS
-    console.log('BEFORE');
-    console.log(meetingsFiltered);
     let meetingGroupsObj = groupBy(meetingsFiltered, this.state.groupByPerson);
-    console.log('AFTER GROUPING');
-    console.log(meetingGroupsObj);
-    //
 
-
-    // 3 nacina prikaza -------------------------
-    let Group = (props) => {
-      let jsx_arr = props.meetings.map(() => {
-        return (<div className="item">ITEM</div>);
-      });
-      return (
-        <>
-          {jsx_arr}
-        </>
-      );
-    };
-
+    // PRESENTATION
 
     let jsx = null;
     if (this.state.makeGroups) {
       // items rendered in groups
       let groupKeysArr = Object.keys(meetingGroupsObj); // extracting keys from object
-      let jsxGroups = groupKeysArr.map((group_key) => {
-        let groupMeetings = meetingGroupsObj[group_key]; // extract meetings from one group
+      let jsxGroups = groupKeysArr.map((groupKey) => {
+        let groupMeetings = meetingGroupsObj[groupKey]; // extract meetings from one group
         return (
-          <div key={group_key} className="items-group">
-            <Group meetings={groupMeetings} />
-          </div>
+          <MeetingsGroup key={groupKey} meetings={groupMeetings} />
         );
       });
       jsx = jsxGroups;
 
     } else {
-      // normal items, without groups
+      // simple items rendering without groups
       jsx = meetingsFiltered.map((item, index) => {
         return (
-          <div key={index} className="item">{item.firstname} {item.lastname} {item.date} {item.lat} {item.long}</div>
+          <MeetingItem key={index} meeting={item} />
         );
       })
 
