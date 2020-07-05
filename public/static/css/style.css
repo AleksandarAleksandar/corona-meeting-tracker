@@ -15,7 +15,9 @@ body {
   margin: 0px;
 }
 
-h2, h3, h4 {
+h2,
+h3,
+h4 {
   margin: 0px;
   margin-bottom: 0.5em;
 }
@@ -252,6 +254,18 @@ label {
   width: unset;
 }
 
+.form-error {
+  color: #f44336;
+  font-weight: 600;
+  padding-left: 4px;
+  font-size: 15px;
+}
+.form-error span {
+  color: black;
+  margin-right: 2px;
+  font-weight: 900;
+}
+
 .form-box h4 {
   display: block;
   margin: 0px;
@@ -328,13 +342,12 @@ label {
   display: block;
 }
 
-
 /* ITEMS */
 
 .items-group {
   border-top: 1px solid silver;
   padding-top: 5px;
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .item {
   margin-bottom: 10px;

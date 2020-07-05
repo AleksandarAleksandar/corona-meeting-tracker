@@ -17,11 +17,13 @@ class MeetingForm extends React.Component {
       lastname: '',
       date: '',
       lat: '',
-      long: ''
+      long: '',
+      errors: {}
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this._updatePosition = this._updatePosition.bind(this);
     this._submit = this._submit.bind(this);
+    this._validate = this._validate.bind(this);
   }
 
   handleInputChange(event) {
@@ -61,13 +63,49 @@ class MeetingForm extends React.Component {
       lastname: '',
       date: '',
       lat: '',
-      long: ''
+      long: '',
+      errors: {}
     });
   }
 
+  _validate(submitData) {
+    let valid = true;
+    let s = submitData;
+    let errors = {};
+    if (s.firstname.trim() === '') {
+      valid = false;
+      errors.firstname = 'First name can not be empty';
+    }
+    if (s.lastname.trim() === '') {
+      valid = false;
+      errors.lastname = 'Last name can not be empty';
+    }
+    let date_invalid = false;
+    let d = new Date(s.date);
+    if (isNaN(d.getTime())) {
+      date_invalid = true
+      valid = false;
+      errors.date = 'Date invalid format. Please use the followring format YYYY-MM-DD (ECMAScript Date string)';
+    }
+    this.setState({
+      errors
+    })
+    return valid;
+  }
+
   _submit() {
-    this.props.dispatch(actionMeetingAdd(this.state));
-    this._clearForm();
+    let submitData = {
+      firstname: this.state.firstname.trim(),
+      lastname: this.state.lastname.trim(),
+      date: this.state.date,
+      lat: this.state.lat,
+      long: this.state.long
+    };
+    if (this._validate(submitData)) {
+      // if validating success, we submit
+      this.props.dispatch(actionMeetingAdd(submitData));
+      this._clearForm();
+    }
   }
 
   render() {
@@ -106,6 +144,20 @@ class MeetingForm extends React.Component {
       jsxModal = jsxModalCurrentLocation;
     }
 
+    let Err = (props) => {
+      let jsxErr = null;
+      if (props.err) {
+        jsxErr = (
+          <div className="form-error"><span>*</span> {props.err}</div>
+        );
+      }
+      return (
+        <>
+          {jsxErr}
+        </>
+      )
+    }
+
     return (
       <div className="form-box">
         <Modals cbClose={_closeModal}>
@@ -123,6 +175,7 @@ class MeetingForm extends React.Component {
               value={this.state.firstname}
               onChange={this.handleInputChange}
             />
+            <Err err={this.state.errors.firstname} />
           </div>
 
           <div className="form-field">
@@ -133,6 +186,7 @@ class MeetingForm extends React.Component {
               value={this.state.lastname}
               onChange={this.handleInputChange}
             />
+            <Err err={this.state.errors.lastname} />
           </div>
 
           <div className="form-field">
@@ -145,6 +199,7 @@ class MeetingForm extends React.Component {
               value={this.state.date}
               onChange={this.handleInputChange}
             />
+            <Err err={this.state.errors.date} />
           </div>
 
           <div className="form-group">
