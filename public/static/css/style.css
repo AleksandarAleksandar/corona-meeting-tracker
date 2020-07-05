@@ -48,7 +48,7 @@ h2 {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  min-width: 360px;
+  min-width: 400px;
 }
 
 .app .header {
@@ -64,7 +64,7 @@ h1 {
 
 .app .main {
   flex: 1;
-  padding: 30px;
+  padding: 30px 10px;
 }
 
 .app .footer {
@@ -240,7 +240,7 @@ h1 {
 
 input[type="text"],
 input[type="number"] {
-  border: 1px solid #869dcc;
+  border: 1px solid #7EB2A7;
   border-radius: 4px;
   padding: 5px 10px;
   font-size: 16px;
@@ -255,7 +255,7 @@ input::placeholder {
   color: rgba(192, 192, 192, 1);
 }
 label {
-  color: #869dcc;
+  color: #7EB2A7;
   padding-left: 4px;
   font-size: 14px;
   font-weight: 400;
@@ -280,7 +280,7 @@ label {
 }
 
 .search-form-box {
-  border: 2px solid #869dcc;
+  border: 2px solid #7EB2A7;
   border-radius: 200px;
   padding: 6px 10px;
 }
@@ -294,7 +294,7 @@ label {
 }
 
 .btn {
-  border: 2px solid #869dcc;
+  border: 2px solid #7EB2A7;
   border-radius: 4px;
   min-width: 120px;
   padding-left: 10px;
@@ -306,7 +306,7 @@ label {
   margin-bottom: 5px;
 }
 .btn:hover {
-  background-color: #869dcc;
+  background-color: #7EB2A7;
   color: white;
   cursor: pointer;
 }
@@ -329,7 +329,7 @@ label {
   cursor: pointer;
 }
 .filter > .active {
-  color: #869dcc;
+  color: #7EB2A7;
   font-weight: 700;
 }
 .filter > .title {
